@@ -2,3 +2,39 @@
     width: 100%;
     max-width: 1000px;
 }
+
+.flag {
+    max-width: 50px;
+}
+
+li {
+    list-style: none;
+}
+
+h1 {
+    text-align: center;
+}
+
+.region-europe {
+    color: gold;
+}
+
+.region-africa {
+    color: darkblue;
+}
+
+.region-americas {
+    color: darkgreen;
+}
+
+.region-asia {
+    color: darkred;
+}
+
+.region-oceania {
+    color: purple;
+}
+
+.region-default {
+    color: grey;
+}
