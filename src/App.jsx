@@ -97,27 +97,31 @@ function App() {
                 })}
             </ul>
 
+            <section className="outer-container">
+                <div className="container-search-field">
+                    <input type="text"
+                           name="search"
+                           id="search-field"
+                           value={inputValue}
+                           onChange={(e) => setInputValue(e.target.value)}
+                           onKeyDown={(e) => e.key === "Enter" && searchCountries()}
 
-            <input type="text"
-                   name="search"
-                   id="search-field"
-                   value={inputValue}
-                   onChange={(e) => setInputValue(e.target.value)}
-                   onKeyDown={(e) => e.key === "Enter" && searchCountries()}
+                    />
 
-            />
-            <button type="button" onClick={handleClick} disabled={loading}>Search</button>
+                    <button type="button" onClick={handleClick} disabled={loading}>Search</button>
 
-            {error && <p>{inputValue} does not exist. Please try again.</p>}
+                    {error && <p>{inputValue} does not exist. Please try again.</p>}
+                </div>
 
-
-            <div className="container-search-result">
-                <img className="flag" src={searchResult.flags?.svg} alt={searchResult.flags?.alt}/>
-                <h2>{searchResult.name?.common}</h2>
-                <p>{searchResult.name?.common} is situated in {searchResult.subregion} and the capital
-                    is {searchResult.capital}. </p>
-                <p>It has a population of {populationMillions(searchResult.population)} million people and it borders with {searchResult.borders?.length} neighboring countries</p>
-            </div>
+                <div className="container-search-result">
+                    <img className="flag" src={searchResult.flags?.svg} alt={searchResult.flags?.alt}/>
+                    <h2 className={coloredRegionName(searchResult.region)}>{searchResult.name?.common}</h2>
+                    <p>{searchResult.name?.common} is situated in {searchResult.subregion} and the capital
+                        is {searchResult.capital}. </p>
+                    <p>It has a population of {populationMillions(searchResult.population)} million people and it
+                        borders with {searchResult.borders?.length} neighboring countries</p>
+                </div>
+            </section>
         </>
     )
 }
