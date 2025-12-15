@@ -11,8 +11,8 @@ function App() {
     const [countries, setCountries] = useState([]);
     const [error, toggleError] = useState(false);
     const [loading, toggleLoading] = useState(false);
-    const [searchResult, setSearchResult] = useState([]);
-    // const [inputValue, setInputValue] = useState('');
+    const [searchResult, setSearchResult] = useState(0);
+    const [inputValue, setInputValue] = useState('');
 
 
 
@@ -51,13 +51,6 @@ function App() {
             setSearchResult(outcome.data[0]);
 
 
-            // outcome.data.filter((output) => {
-            //     if (output.data === 'name' && output.data === 'capital') {
-            //         return true
-            //     }
-            // })
-            // console.log(outcome.data);
-
         } catch (error) {
             console.error(error);
             toggleError(true)
@@ -68,10 +61,6 @@ function App() {
         }
     }
 
-    // function handleSubmit(e) {
-    //     e.preventDefault();
-    //     searchCountries(inputValue);
-    // }
 
 
 
@@ -104,21 +93,24 @@ function App() {
                 })}
             </ul>
 
-            {/*<form onSubmit={handleSubmit} >*/}
-            {/*    <input type="text"*/}
-            {/*    value={inputValue}*/}
-            {/*    onChange={(e) => setInputValue(e.target.value)}*/}
-            {/*    />*/}
-            {/*    <button type="submit" disabled={loading}>search</button>*/}
 
-            {/*</form>*/}
+            <input type="text"
+                   name="search"
+                   id="search-field"
+                   value={inputValue}
+                   onChange={(e) => setInputValue(e.target.value)}
+                   onKeyDown={(e) => e.key === "Enter" && searchCountries()}
+
+            />
             <button type="button" onClick={searchCountries}>Search</button>
+
+
             <div className="container-search-result">
                 <img className="flag" src={searchResult.flags?.svg} alt={searchResult.flags?.alt}/>
                 <h2>{searchResult.name?.common}</h2>
                 <p>{searchResult.name?.common} is situated in {searchResult.subregion} and the capital
                     is {searchResult.capital}. </p>
-                <p>It has a population of {populationMillions(searchResult.population)} million people and it borders with {searchResult.borders.length} neighboring countries</p>
+                <p>It has a population of {populationMillions(searchResult.population)} million people and it borders with {searchResult.borders?.length} neighboring countries</p>
             </div>
         </>
     )
