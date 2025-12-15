@@ -43,24 +43,28 @@ function App() {
         try {
             toggleLoading(true);
             toggleError(false);
-            const outcome = await axios.get('https://restcountries.com/v3.1/name/nederland');
+            const outcome = await axios.get(`https://restcountries.com/v3.1/name/${inputValue}`);
             console.log(outcome.data);
             console.log(outcome.data[0]?.capital[0]);
             console.log(outcome.data[0]?.name?.common);
 
             setSearchResult(outcome.data[0]);
-
+            setInputValue('');
 
         } catch (error) {
             console.error(error);
-            toggleError(true)
+            toggleError(true);
 
         } finally {
-            toggleLoading(false)
+            toggleLoading(false);
 
         }
     }
 
+    const handleClick = () => {
+        searchCountries(inputValue);
+
+    }
 
 
 
@@ -102,7 +106,9 @@ function App() {
                    onKeyDown={(e) => e.key === "Enter" && searchCountries()}
 
             />
-            <button type="button" onClick={searchCountries}>Search</button>
+            <button type="button" onClick={handleClick} disabled={loading}>Search</button>
+
+            {error && <p>{inputValue} does not exist. Please try again.</p>}
 
 
             <div className="container-search-result">
